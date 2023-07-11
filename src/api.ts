@@ -136,7 +136,7 @@ export const getLostPets = ((async (event) => {
     let db = await init();
 
     // TODO: Finish implementation here
-    const result = db.exec("SELECT pets.* FROM pets full outer join owners_pets ON owners_pets.pet_id = pets.id order by ISNULL(owners_pets.owner_id)");
+    const result = db.exec("SELECT id, name FROM pets left join owners_pets ON owners_pets.pet_id = pets.id where owner_id IS NULL;");
     
     const prettyResults = serialize(result);
 
